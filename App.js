@@ -9,6 +9,7 @@ import "react-native-gesture-handler";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import NotificationScreen from "./app/screens/NotificationScreen";
 import SettingsContext from "./app/screens/SettingsContext";
 
 enableScreens();
@@ -55,6 +56,7 @@ export default function App() {
           >
             <Stack.Screen name="Welcome" component={WelcomeScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Notifications" component={NotificationScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

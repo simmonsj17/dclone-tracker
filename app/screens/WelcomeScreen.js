@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import colors from "./../config/colors";
 import OpaqueStatusScreen from "./OpaqueStatusScreen";
 import SettingsContext from "./SettingsContext";
+import NotificationService from "../services/NotificationService";
 
 function buildApiUrl(region, ladder, core) {
   let apiUrl = "https://diablo2.io/dclone_api.php?";
@@ -61,6 +62,7 @@ function WelcomeScreen(props) {
   const { core, ladder } = useContext(SettingsContext);
   const [allServerData, setAllServerData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const openSettingsScreen = () => navigation.navigate("Settings");
@@ -78,6 +80,17 @@ function WelcomeScreen(props) {
       try {
         const allData = await fetchAllServerData();
         console.log(`Fetched data for ${allData.length} server combinations`);
+        
+        // Initialize notifications on first successful fetch
+        if (!isInitialized && allData.length > 0) {
+          await NotificationService.requestPermissions();
+          await NotificationService.initializePreviousData(allData);
+          setIsInitialized(true);
+        } else if (isInitialized && allData.length > 0) {
+          // Check for progress changes and send notifications
+          await NotificationService.checkForProgressChanges(allData);
+        }
+        
         setAllServerData(allData);
       } catch (error) {
         console.error("Error fetching all server data:", error);
@@ -101,7 +114,7 @@ function WelcomeScreen(props) {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [isEnabled]);
+  }, [isEnabled, isInitialized]);
 
   return (
     <View style={styles.container}>

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
 
 import colors from "../config/colors";
 import SettingsContext from "./SettingsContext.js";
@@ -20,6 +21,7 @@ function SettingOption({ label, onPress, isSelected }) {
 
 function SettingsScreen() {
   const { core, setCore, ladder, setLadder } = useContext(SettingsContext);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -52,6 +54,15 @@ function SettingsScreen() {
           onPress={() => setLadder("Non-Ladder")}
         />
       </View>
+
+      <TouchableOpacity 
+        style={styles.notificationButton} 
+        onPress={() => navigation.navigate("Notifications")}
+      >
+        <Icon name="bell-outline" size={24} color={colors.important} />
+        <Text style={styles.notificationButtonText}>Notification Settings</Text>
+        <Icon name="chevron-right" size={24} color={colors.important} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -94,6 +105,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.important,
     marginLeft: 10,
+  },
+  notificationButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.black,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderRadius: 10,
+    margin: 20,
+    marginTop: 30,
+    borderWidth: 2,
+    borderColor: colors.border,
+  },
+  notificationButtonText: {
+    flex: 1,
+    fontSize: 18,
+    color: colors.important,
+    marginLeft: 12,
+    fontWeight: "bold",
   },
 });
 
