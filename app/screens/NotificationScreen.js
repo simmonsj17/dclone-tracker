@@ -27,9 +27,6 @@ function NotificationItem({ option, isEnabled, onToggle }) {
     <View style={styles.notificationItem}>
       <View style={styles.itemContent}>
         <Text style={styles.itemLabel}>{option.label}</Text>
-        <Text style={styles.itemDetails}>
-          Get notified when progress increases
-        </Text>
       </View>
       <Switch
         trackColor={{ false: colors.secondary, true: "#81b0ff" }}
@@ -95,7 +92,7 @@ function NotificationScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Text style={styles.header}>Notification Settings</Text>
       
       <View style={styles.globalToggleContainer}>
@@ -124,14 +121,16 @@ function NotificationScreen() {
             Choose which servers you want to receive notifications for when progress increases
           </Text>
           
-          {serverOptions.map((option) => (
-            <NotificationItem
-              key={option.key}
-              option={option}
-              isEnabled={!!notificationSettings[option.key]}
-              onToggle={() => toggleNotificationForServer(option.key)}
-            />
-          ))}
+          <View style={styles.serverListContainer}>
+            {serverOptions.map((option) => (
+              <NotificationItem
+                key={option.key}
+                option={option}
+                isEnabled={!!notificationSettings[option.key]}
+                onToggle={() => toggleNotificationForServer(option.key)}
+              />
+            ))}
+          </View>
         </>
       )}
     </ScrollView>
@@ -142,7 +141,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primary,
+  },
+  contentContainer: {
     padding: 20,
+    paddingBottom: 80,
   },
   header: {
     fontSize: 30,
@@ -193,15 +195,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     lineHeight: 20,
   },
+  serverListContainer: {
+    backgroundColor: colors.black,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: colors.border,
+    overflow: 'hidden',
+  },
   notificationItem: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.black,
     padding: 16,
-    borderRadius: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: colors.border,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
   itemContent: {
     flex: 1,
