@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "DClone Tracker",
+    "slug": "dclone-tracker",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./app/assets/DClone_tracker_icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./app/assets/DClone_tracker_splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/0dfceeeb-c59e-41d3-95d2-36943f092e83"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./app/assets/DClone_tracker_icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.simmonsj17.dclonetracker"
+    },
+    "web": {
+      "favicon": "./app/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0dfceeeb-c59e-41d3-95d2-36943f092e83"
+      }
+    },
+    "owner": "simmonsj17",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
