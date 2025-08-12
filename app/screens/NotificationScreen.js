@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Switch, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 import colors from "../config/colors";
 
@@ -42,6 +43,7 @@ function NotificationItem({ option, isEnabled, onToggle }) {
 function NotificationScreen() {
   const [notificationSettings, setNotificationSettings] = useState({});
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     loadNotificationSettings();
@@ -133,6 +135,16 @@ function NotificationScreen() {
           </View>
         </>
       )}
+      
+      <View style={styles.saveButtonContainer}>
+        <TouchableOpacity 
+          style={styles.saveButton} 
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name="content-save" size={24} color={colors.primary} />
+          <Text style={styles.saveButtonText}>Save Settings</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 }
@@ -221,6 +233,26 @@ const styles = StyleSheet.create({
   itemDetails: {
     fontSize: 12,
     color: colors.white,
+  },
+  saveButtonContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
+  },
+  saveButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.important,
+    paddingHorizontal: 30,
+    paddingVertical: 16,
+    borderRadius: 10,
+  },
+  saveButtonText: {
+    fontSize: 18,
+    color: colors.primary,
+    marginLeft: 8,
+    fontWeight: "bold",
   },
 });
 

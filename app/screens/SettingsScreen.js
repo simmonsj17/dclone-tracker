@@ -63,6 +63,14 @@ function SettingsScreen() {
         <Text style={styles.notificationButtonText}>Notification Settings</Text>
         <Icon name="chevron-right" size={24} color={colors.important} />
       </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={styles.saveButton} 
+        onPress={() => navigation.goBack()}
+      >
+        <Icon name="content-save" size={24} color={colors.primary} />
+        <Text style={styles.saveButtonText}>Save Settings</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -123,6 +131,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.important,
     marginLeft: 12,
+    fontWeight: "bold",
+  },
+  saveButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.important,
+    paddingHorizontal: 30,
+    paddingVertical: 16,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  saveButtonText: {
+    fontSize: 18,
+    color: colors.primary,
+    marginLeft: 8,
     fontWeight: "bold",
   },
 });
